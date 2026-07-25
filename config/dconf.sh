@@ -35,3 +35,6 @@ gsettings set org.cinnamon hotcorner-layout "['expo:true:0:0', 'scale:false:0:0'
 gsettings set org.cinnamon panels-enabled "['1:0:bottom']"
 
 echo "Done. Log out and back in for full effect."
+
+# Browser
+xdg-settings set default-web-browser brave-origin-nightly.desktop
