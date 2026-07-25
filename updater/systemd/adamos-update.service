@@ -1,0 +1,12 @@
+[Unit]
+Description=adamos weekly system update sweep (apt + flatpak/snap + cleanup)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/adamos-update.sh --quiet
+TimeoutStartSec=3600
+Nice=10
+IOSchedulingClass=best-effort
+IOSchedulingPriority=6

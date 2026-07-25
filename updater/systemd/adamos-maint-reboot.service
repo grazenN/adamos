@@ -1,0 +1,6 @@
+[Unit]
+Description=adamos monthly maintenance reboot (only if reboot pending)
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/adamos-maint-reboot.sh

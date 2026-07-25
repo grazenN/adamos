@@ -1,0 +1,9 @@
+[Unit]
+Description=adamos monthly maintenance reboot window (first Saturday 05:45)
+
+[Timer]
+OnCalendar=Sat *-*-01..07 05:45:00
+Persistent=false
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,9 @@
+[Unit]
+Description=Run adamos update sweep weekly (Saturday 05:30)
+
+[Timer]
+OnCalendar=Sat *-*-* 05:30:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
