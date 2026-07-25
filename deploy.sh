@@ -82,3 +82,6 @@ systemctl daemon-reload
 systemctl enable --now adamos-update.timer 2>/dev/null || true
 
 ok "adams deploy complete! Log out/in to see changes."
+
+info " — Enabling /usr/local/sbin in sudo PATH"
+echo 'Defaults secure_path="/usr/local/sbin:/usr/sbin:/usr/bin:/sbin:/bin"' > /etc/sudoers.d/adamos-path
