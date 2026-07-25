@@ -105,3 +105,16 @@ efibootmgr -B -b 0001 2>/dev/null || true
 efibootmgr -c -d /dev/mmcblk0 -p 1 -L "adamos" -l '\EFI\debian\shimx64.efi' 2>/dev/null || true
 
 update-initramfs -u 2>/dev/null
+
+info " — Setting up window opacity shortcuts"
+apt-get install -y --no-install-recommends x11-apps 2>/dev/null || true
+sudo -u "$ADAM_USER" gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ name "Opacity 80%"
+sudo -u "$ADAM_USER" gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ binding "['<Alt><Super>8']"
+sudo -u "$ADAM_USER" gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ command "transset -a 0.8"
+sudo -u "$ADAM_USER" gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom1/ name "Opacity 60%"
+sudo -u "$ADAM_USER" gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom1/ binding "['<Alt><Super>6']"
+sudo -u "$ADAM_USER" gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom1/ command "transset -a 0.6"
+sudo -u "$ADAM_USER" gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom2/ name "Opacity 100%"
+sudo -u "$ADAM_USER" gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom2/ binding "['<Alt><Super>0']"
+sudo -u "$ADAM_USER" gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom2/ command "transset -a 1"
+sudo -u "$ADAM_USER" gsettings set org.cinnamon.desktop.keybindings custom-list "['custom0', 'custom1', 'custom2']"
