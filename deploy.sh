@@ -85,3 +85,23 @@ ok "adams deploy complete! Log out/in to see changes."
 
 info " — Enabling /usr/local/sbin in sudo PATH"
 echo 'Defaults secure_path="/usr/local/sbin:/usr/sbin:/usr/bin:/sbin:/bin"' > /etc/sudoers.d/adamos-path
+
+info "9/9 — Configuring boot (plymouth + GRUB)"
+# Install plymouth if not present
+apt-get install -y --no-install-recommends plymouth plymouth-themes 2>/dev/null || true
+
+# Install custom adamos boot logo
+cp "$ADAMOS_DIR/boot/plymouth/logo.png" /usr/share/plymouth/themes/ceratopsian/logo.png
+
+# Set plymouth theme
+plymouth-set-default-theme ceratopsian 2>/dev/null || true
+
+# Enable splash in GRUB
+sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/' /etc/default/grub
+update-grub 2>/dev/null
+
+# Update UEFI boot entry description
+efibootmgr -B -b 0001 2>/dev/null || true
+efibootmgr -c -d /dev/mmcblk0 -p 1 -L "adamos" -l '\EFI\debian\shimx64.efi' 2>/dev/null || true
+
+update-initramfs -u 2>/dev/null
