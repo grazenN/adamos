@@ -1,0 +1,10 @@
+PRETTY_NAME="adamos GNU/Linux (forky)"
+NAME="adamos GNU/Linux"
+VERSION_CODENAME=forky
+ID=adamos
+ID_LIKE=debian
+HOME_URL="https://adamos.dev"
+SUPPORT_URL="https://adamos.dev/support"
+BUG_REPORT_URL="https://adamos.dev/bugs"
+VENDOR_NAME=adamos
+LOGO=logo-adamos.png
