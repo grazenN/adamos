@@ -118,3 +118,24 @@ sudo -u "$ADAM_USER" gsettings set org.cinnamon.desktop.keybindings.custom-keybi
 sudo -u "$ADAM_USER" gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom2/ binding "['<Alt><Super>0']"
 sudo -u "$ADAM_USER" gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom2/ command "transset -a 1"
 sudo -u "$ADAM_USER" gsettings set org.cinnamon.desktop.keybindings custom-list "['custom0', 'custom1', 'custom2']"
+
+info " — Setting 85% default window opacity (devilspie2)"
+apt-get install -y --no-install-recommends devilspie2 2>/dev/null || true
+mkdir -p "/home/$ADAM_USER/.config/devilspie2"
+cat > "/home/$ADAM_USER/.config/devilspie2/adamos-opacity.lua" << 'LUA'
+-- adamos OS: 85% default opacity for all windows
+if get_window_type() == "WINDOW_TYPE_NORMAL" then
+    set_window_opacity(0.85)
+end
+LUA
+chown -R "$ADAM_USER:$ADAM_USER" "/home/$ADAM_USER/.config/devilspie2"
+mkdir -p "/home/$ADAM_USER/.config/autostart"
+cat > "/home/$ADAM_USER/.config/autostart/devilspie2.desktop" << 'DESKTOP'
+[Desktop Entry]
+Type=Application
+Name=Devilspie2 (window opacity)
+Exec=devilspie2 -f %h/.config/devilspie2
+X-Cinnamon-Autostart-Enabled=true
+NoDisplay=true
+DESKTOP
+chown -R "$ADAM_USER:$ADAM_USER" "/home/$ADAM_USER/.config/autostart"
